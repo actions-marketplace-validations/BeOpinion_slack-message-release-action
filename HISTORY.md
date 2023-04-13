@@ -1,3 +1,9 @@
+## 1.3.0
+
+Changes:
+
+- Use builded js file (3ccb948)
+
 ## 1.2.0
 
 Changes:
