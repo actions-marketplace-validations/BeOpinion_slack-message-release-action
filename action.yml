@@ -1,4 +1,4 @@
-name: 'Slack release message'
+name: 'Slack release message BeOp'
 description: 'A GitHub Action to push a slack webhook'
 branding:
   icon: 'message-circle'
@@ -15,4 +15,4 @@ inputs:
     required: true
 runs:
   using: "node16"
-  main: "index.js"
+  main: "dist/index.js"
