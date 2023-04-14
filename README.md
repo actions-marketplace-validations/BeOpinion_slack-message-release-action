@@ -49,7 +49,7 @@ Your slack webhook URL
   run: echo "version=${{ github.ref_name }}" >> $GITHUB_OUTPUT
 
 - name: Notify on Slack
-  uses: BeOpinion/slack-message-release-action@v1.3.0
+  uses: BeOpinion/slack-message-release-action@v1.3.1
   with:
     version: ${{ steps.version.outputs.version }}
     changelog: ${{ steps.changelog.outputs.changelog }}
@@ -66,21 +66,27 @@ Here, we have chosen the second way. To do that, we use [Vercel NCC tool](https:
 
 So to build and release a new version:
 
-1. Update `HISTORY.md` and `package.json` version.
-2. Commit them.
+1. Build the Github Action (after installing ncc)
+
+```sh
+$ ncc build index.js -o dist
+```
+
+2. Update `HISTORY.md` and `package.json` version.
+3. Commit them.
 
 ```sh
 $ git add .
-$ git commit -m "X.X.X release notes
+$ git commit -m "X.X.X release notes"
 ```
 
-3. Create a new tag for this version.
+4. Create a new tag for this version.
 
 ```sh
 $ git tag -a "vX.X.X" -m "vX.X.X"
 ```
 
-4. Push the newly created commit and tag.
+5. Push the newly created commit and tag.
 
 ```sh
 $ git push && git push --tags
