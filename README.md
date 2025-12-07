@@ -49,9 +49,45 @@ Your slack webhook URL
   run: echo "version=${{ github.ref_name }}" >> $GITHUB_OUTPUT
 
 - name: Notify on Slack
-  uses: bloodyowl/slack-message-release-action@v1.1.5
+  uses: BeOpinion/slack-message-release-action@v1.3.1
   with:
     version: ${{ steps.version.outputs.version }}
     changelog: ${{ steps.changelog.outputs.changelog }}
     slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+```
+
+## Build & Release
+
+Github Actions does not allow to install dependencies automatically when the action is loaded.
+One way to fix this issue would be to version the `node_modules` folder.
+Another way would be to build the action into one single script also containing all its dependencies.
+
+Here, we have chosen the second way. To do that, we use [Vercel NCC tool](https://github.com/vercel/ncc).
+
+So to build and release a new version:
+
+1. Build the Github Action (after installing ncc)
+
+```sh
+$ ncc build index.js -o dist
+```
+
+2. Update `HISTORY.md` and `package.json` version.
+3. Commit them.
+
+```sh
+$ git add .
+$ git commit -m "X.X.X release notes"
+```
+
+4. Create a new tag for this version.
+
+```sh
+$ git tag -a "vX.X.X" -m "vX.X.X"
+```
+
+5. Push the newly created commit and tag.
+
+```sh
+$ git push && git push --tags
 ```

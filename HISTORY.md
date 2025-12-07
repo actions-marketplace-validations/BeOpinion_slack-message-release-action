@@ -1,3 +1,9 @@
+## 1.3.1
+
+Changes:
+
+- Update README with build & release instructions (e777fa4)
+
 ## 1.3.0
 
 Changes:
